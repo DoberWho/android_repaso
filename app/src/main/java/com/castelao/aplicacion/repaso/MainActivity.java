@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.castelao.aplicacion.repaso.models.Producto;
 
@@ -35,13 +38,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initButtons() {
+        final EditText edt = this.findViewById(R.id.act_main_edt);
+
         Button btn = this.findViewById(R.id.act_main_boton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String txt = edt.getText().toString();
                 cambiarDeActivity();
             }
         });
+
+
     }
 
     private void cambiarDeActivity() {
