@@ -29,7 +29,7 @@
         app:srcCompat="@mipmap/alien_walk" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/act_main_boton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/act_main_boton" />
 
     <EditText
         android:id="@+id/editTextTime"
