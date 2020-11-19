@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         Producto prod = new Producto();
 
-        Intent intent = new Intent(this, ProductoActivity.class);
+        Intent intent = new Intent(this, AdapterActivity.class);
         intent.putExtra(ProductoActivity.INTENT_PRODUCTO, prod);
         startActivity(intent);
     }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">My Application</string>
     <string name="hola">Hola, Que Tal</string>
+    <string name="ejemplo_adapter_title">Ejemplo de Adaptador</string>
 </resources>

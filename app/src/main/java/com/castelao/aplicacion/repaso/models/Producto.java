@@ -1,5 +1,9 @@
 package com.castelao.aplicacion.repaso.models;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.widget.ImageButton;
+
 import java.io.Serializable;
 
 public class Producto implements Serializable {
@@ -7,6 +11,7 @@ public class Producto implements Serializable {
     private String name;
     private int stock;
     private int precio;
+    public Drawable img;
 
     public int getId() {
         return id;
