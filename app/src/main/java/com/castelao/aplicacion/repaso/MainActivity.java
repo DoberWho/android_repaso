@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.castelao.aplicacion.repaso.models.Producto;
+import com.castelao.aplicacion.repaso.net.Network;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +50,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String txt = edt.getText().toString();
                 cambiarDeActivity();
+            }
+        });
+
+
+        Button btn2 = this.findViewById(R.id.act_main_boton2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "https://www.omdbapi.com/?apikey=9fea2342&s=cars";
+                Network net = Network.init();
+                try {
+                    net.peticionGET(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
