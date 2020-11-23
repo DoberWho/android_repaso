@@ -2,9 +2,15 @@ package com.castelao.aplicacion.repaso.net;
 
 import android.util.Log;
 
+import com.castelao.aplicacion.repaso.models.Pelicula;
+import com.castelao.aplicacion.repaso.models.PeliculaRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -37,6 +43,12 @@ public class Network {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String data = response.body().string();
                 Log.d("OKHTTP", "DATA: "+data);
+
+
+                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+                PeliculaRequest dataReq = gson.fromJson(data, PeliculaRequest.class);
+                List<Pelicula> lista = dataReq.getPeliculas();
+                Log.d("OKHTTP", "Peliculas: "+lista.size());
             }
 
             @Override
