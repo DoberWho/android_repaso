@@ -2,16 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:background="#7B7B7B"
     android:padding="0dp">
 
     <ImageButton
         android:id="@+id/pelicula_item_adapter_imgbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="222dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,23 +38,25 @@
         app:layout_constraintTop_toBottomOf="@+id/pelicula_adapter_item_name_txt">
 
         <TextView
-            android:id="@+id/pelicula_adapter_item_year_txt"
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/movie_year"
             android:textAlignment="textEnd"
-            android:textColor="#F6F4F4"
+            android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/pelicula_adapter_item_year_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2020"
-            android:textColor="#FFFFFF"
+            android:text="0000"
+            android:textAlignment="textStart"
+            android:textColor="#F6F4F4"
             android:textStyle="bold" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

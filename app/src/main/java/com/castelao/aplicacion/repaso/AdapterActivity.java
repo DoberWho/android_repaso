@@ -9,6 +9,9 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.castelao.aplicacion.repaso.adapters.PeliculaAdapter;
 import com.castelao.aplicacion.repaso.adapters.ProductoAdapter;
@@ -25,6 +28,12 @@ public class AdapterActivity extends AppCompatActivity {
 
     private RecyclerView contendor;
     private Activity ctx;
+    private ImageButton btnPrev, btnNext;
+    private TextView txtCurrentPage, amountItems, maxPage;
+
+    private int currentPage = 1;
+    private int maxPages = 1;
+    private int totalItems = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +45,46 @@ public class AdapterActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         initViews();
+        initButtons();
         updateAdapter();
+    }
+
+    private void initButtons() {
+        btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentPage = currentPage - 1;
+                if (currentPage <= 0){
+                    currentPage = 1;
+                }
+                updateAdapter();
+            }
+        });
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentPage = currentPage + 1;
+                updateAdapter();
+            }
+        });
     }
 
     private void updateAdapter() {
 
-
         PeliculasInterfaces interfaz = new PeliculasInterfaces() {
             @Override
-            public void getPeliculas(final List<Pelicula> lista) {
+            public void getPeliculas(final List<Pelicula> lista, final Integer maxItems) {
 
                 runOnUiThread(new Runnable() {
                     public void run() {
+
+                        totalItems = maxItems;
+                        maxPages = (maxItems / lista.size());
+
+                        txtCurrentPage.setText(""+currentPage);
+                        amountItems.setText(""+totalItems);
+                        maxPage.setText(""+maxPages);
+
                         PeliculaAdapter adapter = new PeliculaAdapter(ctx, lista);
                         contendor.setAdapter(adapter);
                     }
@@ -55,7 +92,7 @@ public class AdapterActivity extends AppCompatActivity {
             }
         };
 
-        String url = "https://www.omdbapi.com/?apikey=9fea2342&s=cars";
+        String url = "https://www.omdbapi.com/?apikey=9fea2342&s=cars&page="+currentPage;
         Network net = Network.init();
         try {
             net.peticionGET(url, interfaz);
@@ -79,5 +116,11 @@ public class AdapterActivity extends AppCompatActivity {
 
         contendor.setLayoutManager(managerGrid);
 
+
+        btnPrev = findViewById(R.id.act_adapter_prev_btn);
+        btnNext = findViewById(R.id.act_adapter_next_btn);
+        txtCurrentPage = findViewById(R.id.act_adapter_current);
+        amountItems = findViewById(R.id.act_adapter_total );
+        maxPage = findViewById(R.id.act_adapter_max);
     }
 }

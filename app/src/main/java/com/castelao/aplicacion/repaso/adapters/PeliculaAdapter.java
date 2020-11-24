@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.castelao.aplicacion.repaso.R;
 import com.castelao.aplicacion.repaso.models.Pelicula;
 import com.castelao.aplicacion.repaso.models.Producto;
@@ -65,7 +66,7 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
         String year = item.getLanzamiento();
         holder.txtYear.setText(year);
 
-        //holder.imgBtn.setImageDrawable(item.img);
+        Glide.with(act).load(item.getImagen()).fitCenter().into(holder.imgBtn);
     }
 
     @Override

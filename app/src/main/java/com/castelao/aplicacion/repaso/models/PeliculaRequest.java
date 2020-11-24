@@ -13,11 +13,11 @@ public class PeliculaRequest {
 
     @Expose
     @SerializedName("totalResults")
-    private String contador;
+    private Integer contador;
 
     @Expose
     @SerializedName("Response")
-    private String sinError;
+    private Boolean sinError;
 
     public List<Pelicula> getPeliculas() {
         return peliculas;
@@ -27,19 +27,19 @@ public class PeliculaRequest {
         this.peliculas = peliculas;
     }
 
-    public String getContador() {
+    public Integer getContador() {
         return contador;
     }
 
-    public void setContador(String contador) {
+    public void setContador(Integer contador) {
         this.contador = contador;
     }
 
-    public String getSinError() {
+    public Boolean getSinError() {
         return sinError;
     }
 
-    public void setSinError(String sinError) {
+    public void setSinError(Boolean sinError) {
         this.sinError = sinError;
     }
 }

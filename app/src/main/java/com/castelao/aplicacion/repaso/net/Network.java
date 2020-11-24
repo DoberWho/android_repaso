@@ -51,10 +51,11 @@ public class Network {
                 Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
                 PeliculaRequest dataReq = gson.fromJson(data, PeliculaRequest.class);
                 List<Pelicula> lista = dataReq.getPeliculas();
+                Integer contador = dataReq.getContador();
                 Log.d("OKHTTP", "Peliculas: "+lista.size());
 
                 if (interfaz != null){
-                    interfaz.getPeliculas(lista);
+                    interfaz.getPeliculas(lista, contador);
                 }
             }
 
