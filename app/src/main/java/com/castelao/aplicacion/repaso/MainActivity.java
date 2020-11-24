@@ -2,6 +2,7 @@ package com.castelao.aplicacion.repaso;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,12 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.castelao.aplicacion.repaso.interfaces.PeliculasInterfaces;
+import com.castelao.aplicacion.repaso.models.Pelicula;
 import com.castelao.aplicacion.repaso.models.Producto;
 import com.castelao.aplicacion.repaso.net.Network;
 
 import java.io.IOException;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +62,7 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://www.omdbapi.com/?apikey=9fea2342&s=cars";
-                Network net = Network.init();
-                try {
-                    net.peticionGET(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
             }
         });
 
@@ -79,4 +77,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(ProductoActivity.INTENT_PRODUCTO, prod);
         startActivity(intent);
     }
+
 }

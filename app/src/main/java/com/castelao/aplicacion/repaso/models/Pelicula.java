@@ -9,7 +9,6 @@ public class Pelicula {
     @SerializedName("Title")
     private String titulo = "";
 
-
     @Expose
     @SerializedName("Year")
     private String lanzamiento = "";

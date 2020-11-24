@@ -12,19 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.castelao.aplicacion.repaso.R;
+import com.castelao.aplicacion.repaso.models.Pelicula;
 import com.castelao.aplicacion.repaso.models.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Holder> {
+public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder> {
 
     private Activity act;
-    private List<Producto> items = new ArrayList<Producto>();
+    private List<Pelicula> items = new ArrayList<Pelicula>();
 
-    public ProductoAdapter(Activity act, List<Producto> items) {
+    public PeliculaAdapter(Activity act, List<Pelicula> items) {
         this.act = act;
         this.items = items;
     }
@@ -32,19 +32,20 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Holder
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate( R.layout.producto_item_adapter, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate( R.layout.pelicula_item_adapter, parent, false);
         Log.i("ADAPTER", "onCreateViewHolder");
         return new Holder(itemView);
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        public TextView txt;
+        public TextView txtTitle, txtYear;
         public ImageButton imgBtn;
 
         public ConstraintLayout linRoot;
 
         void initView(View v){
-            txt = v.findViewById(R.id.producto_item_adapter_txt);
+            txtTitle = v.findViewById(R.id.pelicula_adapter_item_name_txt);
+            txtYear = v.findViewById(R.id.pelicula_adapter_item_year_txt);
             imgBtn = v.findViewById(R.id.pelicula_item_adapter_imgbtn);
         }
 
@@ -56,18 +57,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Holder
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        final Producto item = items.get(position);
+        final Pelicula item = items.get(position);
 
-        String textoPrevi = holder.txt.getText().toString();
-        Log.d("ADAPTER", "TExto PRevio: "+textoPrevi);
+        String texto = item.getTitulo();
+        holder.txtTitle.setText(texto);
 
-        String texto = item.getName();
-        holder.txt.setText(texto);
+        String year = item.getLanzamiento();
+        holder.txtYear.setText(year);
 
-        holder.imgBtn.setImageDrawable(item.img);
-
-        String textoPost = holder.txt.getText().toString();
-        Log.w("ADAPTER", "Texto Post: "+textoPost);
+        //holder.imgBtn.setImageDrawable(item.img);
     }
 
     @Override
