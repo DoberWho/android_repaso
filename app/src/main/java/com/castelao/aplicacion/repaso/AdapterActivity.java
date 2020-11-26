@@ -9,7 +9,10 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -19,13 +22,15 @@ import com.castelao.aplicacion.repaso.interfaces.PeliculasInterfaces;
 import com.castelao.aplicacion.repaso.models.Pelicula;
 import com.castelao.aplicacion.repaso.models.Producto;
 import com.castelao.aplicacion.repaso.net.Network;
+import com.castelao.aplicacion.repaso.net.NetworkRetrofit;
 import com.castelao.aplicacion.repaso.net.NetworkVolley;
+import com.castelao.aplicacion.repaso.tools.BaseActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterActivity extends AppCompatActivity {
+public class AdapterActivity extends BaseActivity {
 
     private RecyclerView contendor;
     private Activity ctx;
@@ -35,6 +40,8 @@ public class AdapterActivity extends AppCompatActivity {
     private int currentPage = 1;
     private int maxPages = 1;
     private int totalItems = 1;
+    private String search = "";
+    private EditText edtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,28 @@ public class AdapterActivity extends AppCompatActivity {
     }
 
     private void initButtons() {
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    search = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (search == null || search.trim().isEmpty()){
+                    return;
+                }
+
+                updateAdapter();
+            }
+        });
+
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +97,7 @@ public class AdapterActivity extends AppCompatActivity {
                 updateAdapter();
             }
         });
+
     }
 
     private void updateAdapter() {
@@ -75,6 +105,10 @@ public class AdapterActivity extends AppCompatActivity {
         PeliculasInterfaces interfaz = new PeliculasInterfaces() {
             @Override
             public void getPeliculas(final List<Pelicula> lista, final Integer maxItems) {
+
+                if (maxItems == null || lista == null){
+                    return;
+                }
 
                 runOnUiThread(new Runnable() {
                     public void run() {
@@ -93,16 +127,17 @@ public class AdapterActivity extends AppCompatActivity {
             }
         };
 
-        String url = "https://www.omdbapi.com/?apikey=9fea2342&s=cars&page="+currentPage;
-        NetworkVolley net = NetworkVolley.init(getApplicationContext());
+        NetworkRetrofit net = NetworkRetrofit.init();
         try {
-            net.peticionGET(url, interfaz);
+            net.peticionGET(search, currentPage, interfaz);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void initViews() {
+        edtSearch = findViewById(R.id.act_adapter_search_edt);
+
         contendor = findViewById(R.id.act_adapter_content_rec);
 
         // Lista Vertical
