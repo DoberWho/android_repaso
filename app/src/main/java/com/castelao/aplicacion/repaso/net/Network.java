@@ -22,8 +22,10 @@ import okhttp3.ResponseBody;
 
 public class Network {
     private OkHttpClient client;
+    private Gson gson;
     private Network(){
         client = new OkHttpClient();
+        gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
     private static Network instance;
 
@@ -47,8 +49,6 @@ public class Network {
                 String data = response.body().string();
                 Log.d("OKHTTP", "DATA: "+data);
 
-
-                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
                 PeliculaRequest dataReq = gson.fromJson(data, PeliculaRequest.class);
                 List<Pelicula> lista = dataReq.getPeliculas();
                 Integer contador = dataReq.getContador();

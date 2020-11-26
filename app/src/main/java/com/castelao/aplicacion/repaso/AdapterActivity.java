@@ -19,6 +19,7 @@ import com.castelao.aplicacion.repaso.interfaces.PeliculasInterfaces;
 import com.castelao.aplicacion.repaso.models.Pelicula;
 import com.castelao.aplicacion.repaso.models.Producto;
 import com.castelao.aplicacion.repaso.net.Network;
+import com.castelao.aplicacion.repaso.net.NetworkVolley;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class AdapterActivity extends AppCompatActivity {
         };
 
         String url = "https://www.omdbapi.com/?apikey=9fea2342&s=cars&page="+currentPage;
-        Network net = Network.init();
+        NetworkVolley net = NetworkVolley.init(getApplicationContext());
         try {
             net.peticionGET(url, interfaz);
         } catch (IOException e) {
