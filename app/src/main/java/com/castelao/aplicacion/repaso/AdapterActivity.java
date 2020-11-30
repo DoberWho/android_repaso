@@ -25,6 +25,8 @@ import com.castelao.aplicacion.repaso.net.Network;
 import com.castelao.aplicacion.repaso.net.NetworkRetrofit;
 import com.castelao.aplicacion.repaso.net.NetworkVolley;
 import com.castelao.aplicacion.repaso.tools.BaseActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -158,5 +160,10 @@ public class AdapterActivity extends BaseActivity {
         txtCurrentPage = findViewById(R.id.act_adapter_current);
         amountItems = findViewById(R.id.act_adapter_total );
         maxPage = findViewById(R.id.act_adapter_max);
+
+
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 }
